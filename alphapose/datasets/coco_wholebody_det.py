@@ -13,7 +13,7 @@ import torch.utils.data as data
 from tqdm import tqdm
 
 from alphapose.utils.presets import SimpleTransform
-from detector.apis import get_detector
+from alphapose.detector.apis import get_detector
 from alphapose.models.builder import DATASET
 
 

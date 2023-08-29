@@ -23,7 +23,7 @@ from tracker.tracker import matching
 from tracker.tracker.basetrack import BaseTrack, TrackState
 from tracker.models import Darknet
 
-from detector.apis import BaseDetector
+from alphapose.detector.apis import BaseDetector
 
 
 class Tracker(BaseDetector):

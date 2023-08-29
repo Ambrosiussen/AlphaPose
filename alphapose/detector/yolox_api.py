@@ -16,7 +16,7 @@ from yolox.yolox.exp import get_exp
 from yolox.utils import prep_image, prep_frame
 from yolox.yolox.utils import postprocess
 
-from detector.apis import BaseDetector
+from alphapose.detector.apis import BaseDetector
 
 
 class YOLOXDetector(BaseDetector):

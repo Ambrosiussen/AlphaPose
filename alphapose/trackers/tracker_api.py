@@ -18,9 +18,9 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 
-from utils.utils import *
-from utils.log import logger
-from utils.kalman_filter import KalmanFilter
+from alphapose.trackers.tracking.utils.utils import *
+from alphapose.trackers.utils.log import logger
+from alphapose.trackers.utils.kalman_filter import KalmanFilter
 from tracking.matching import *
 from tracking.basetrack import BaseTrack, TrackState
 from utils.transform import build_transforms

@@ -21,7 +21,7 @@ from alphapose.utils.presets import SimpleTransform, SimpleTransform3DSMPL
 from alphapose.utils.transforms import flip, flip_heatmap
 from alphapose.models import builder
 from alphapose.utils.config import update_config
-from detector.apis import get_detector
+from alphapose.detector.apis import get_detector
 from alphapose.utils.vis import getTime
 
 """----------------------------- Demo options -----------------------------"""

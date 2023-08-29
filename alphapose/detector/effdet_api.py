@@ -16,7 +16,7 @@ import numpy as np
 from efficientdet.utils import unique, prep_image, prep_frame, bbox_iou
 from efficientdet.effdet import EfficientDet, get_efficientdet_config, DetBenchEval, load_checkpoint
 
-from detector.apis import BaseDetector
+from alphapose.detector.apis import BaseDetector
 
 try:
     from apex import amp
