@@ -18,7 +18,7 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 
-from alphapose.trackers.tracking.utils.utils import *
+from alphapose.trackers.utils.utils import *
 from alphapose.trackers.utils.log import logger
 from alphapose.trackers.utils.kalman_filter import KalmanFilter
 from tracking.matching import *
@@ -35,7 +35,7 @@ class STrack(BaseTrack):
     def __init__(self, tlwh, score, temp_feat, pose,crop_box,file_name,ps,buffer_size=30):
 
         # wait activate
-        self._tlwh = np.asarray(tlwh, dtype=np.float)
+        self._tlwh = np.asarray(tlwh, dtype=np.float64)
         self.kalman_filter = None
         self.mean, self.covariance = None, None
         self.is_activated = False

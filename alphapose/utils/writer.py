@@ -44,7 +44,7 @@ class DataWriter():
                 os.mkdir(opt.outputpath + '/vis')
 
         if opt.pose_flow:
-            from trackers.PoseFlow.poseflow_infer import PoseFlowWrapper
+            from alphapose.trackers.PoseFlow.poseflow_infer import PoseFlowWrapper
             self.pose_flow_wrapper = PoseFlowWrapper(save_path=os.path.join(opt.outputpath, 'poseflow'))
 
         if self.opt.save_img or self.save_video or self.opt.vis:
@@ -100,6 +100,7 @@ class DataWriter():
                 # if the thread indicator variable is set (img is None), stop the thread
                 if self.save_video:
                     stream.release()
+                    
                 write_json(final_result, self.opt.outputpath, form=self.opt.format, for_eval=self.opt.eval)
                 # print("Results have been written to json.")
                 return
