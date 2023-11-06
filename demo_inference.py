@@ -87,14 +87,14 @@ parser.add_argument('--pose_flow', dest='pose_flow',
                     help='track humans in video with PoseFlow', action='store_true', default=False)
 parser.add_argument('--pose_track', dest='pose_track',
                     help='track humans in video with reid', action='store_true', default=False)
+parser.add_argument('--tracker_weights', type=str, required=True,
+                    help='tracker weights file name')
+
 
 args = parser.parse_args()
 cfg = update_config(args.cfg)
 args.sp = True
-
-
-
-    
+tcfg.loadmodel = args.tracker_weights
 
 args.gpus = [int(i) for i in args.gpus.split(',')] if torch.cuda.device_count() >= 1 else [-1]
 args.device = torch.device("cuda:" + str(args.gpus[0]) if args.gpus[0] >= 0 else "cpu")
@@ -104,9 +104,6 @@ args.tracking = args.pose_track or args.pose_flow or args.detector=='tracker'
 
 print(args)
 
-
-print("FIX THIS")
-tcfg.loadmodel = r"H:\Github\MLOPs\data\models\alphapose\osnet_ain_x1_0_msmt17_256x128_amsgrad_ep50_lr0.0015_coslr_b64_fb10_softmax_labsmth_flip_jitter.pth"
 if not args.sp:
     torch.multiprocessing.set_start_method('forkserver', force=True)
     torch.multiprocessing.set_sharing_strategy('file_system')
@@ -156,11 +153,11 @@ def check_input():
         raise NotImplementedError
 
 
-def print_finish_info():
-    print('===========================> Finish Model Running.')
-    if (args.save_img or args.save_video) and not args.vis_fast:
-        print('===========================> Rendering remaining images in the queue...')
-        print('===========================> If this step takes too long, you can enable the --vis_fast flag to use fast rendering (real-time).')
+# def print_finish_info():
+#     print('===========================> Finish Model Running.')
+#     if (args.save_img or args.save_video) and not args.vis_fast:
+#         print('===========================> Rendering remaining images in the queue...')
+#         print('===========================> If this step takes too long, you can enable the --vis_fast flag to use fast rendering (real-time).')
 
 
 def loop():
@@ -279,7 +276,7 @@ if __name__ == "__main__":
                 'det time: {dt:.4f} | pose time: {pt:.4f} | post processing: {pn:.4f}'.format(
                     dt=np.mean(runtime_profile['dt']), pt=np.mean(runtime_profile['pt']), pn=np.mean(runtime_profile['pn']))
             )
-    print_finish_info()
+    # print_finish_info()
     while(writer.running()):
         time.sleep(1)
         print('===========================> Rendering remaining ' + str(writer.count()) + ' images in the queue...', end='\r')
