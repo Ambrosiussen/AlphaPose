@@ -735,11 +735,11 @@ def load_pretrained_weights(model, weight_path):
             'please check the key names manually '
             '(** ignored and continue **)'.format(weight_path)
         )
-    else:
-        print(
-            'loading reid model from {}...'.
-            format(weight_path)
-        )
+    # else:
+        # print(
+        #     'loading reid model from {}...'.
+        #     format(weight_path)
+        # )
         '''
         if len(discarded_layers) > 0:
             print(
