@@ -163,7 +163,7 @@ def get_install_requires():
         'six', 'terminaltables', 'scipy',
         'opencv-python', 'matplotlib', 'visdom',
         'tqdm', 'tensorboardx', 'easydict',
-        'pyyaml', 'halpecocotools',
+        'pyyaml', 
         'torch>=1.1.0', 'torchvision>=0.3.0',
         'munkres', 'timm==0.6.7', 'natsort'
     ]
