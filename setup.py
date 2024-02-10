@@ -93,7 +93,7 @@ def make_cython_ext(name, module, sources):
 
     extension = Extension(
         '{}.{}'.format(module, name),
-        [os.path.join("alphapose", *module.split('.'), p) for p in sources],
+        [os.path.join(*module.split('.'), p) for p in sources],
         include_dirs=[np.get_include()],
         language='c++',
         extra_compile_args=extra_compile_args)
@@ -102,10 +102,10 @@ def make_cython_ext(name, module, sources):
 
 
 def make_cuda_ext(name, module, sources):
-
+    files = [os.path.join(*module.split('.'), p) for p in sources]
     return CUDAExtension(
         name='{}.{}'.format(module, name),
-        sources=[os.path.join("alphapose", *module.split('.'), p) for p in sources],
+        sources=files,
         extra_compile_args={
             'cxx': [],
             'nvcc': [
@@ -126,30 +126,30 @@ def get_ext_modules():
         ext_modules = [
             make_cython_ext(
                 name='soft_nms_cpu',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/soft_nms_cpu.pyx']),
             make_cuda_ext(
                 name='nms_cpu',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/nms_cpu.cpp']),
             make_cuda_ext(
                 name='nms_cuda',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/nms_cuda.cpp', 'src/nms_kernel.cu']),
             make_cuda_ext(
                 name='roi_align_cuda',
-                module='utils.roi_align',
+                module='alphapose.utils.roi_align',
                 sources=['src/roi_align_cuda.cpp', 'src/roi_align_kernel.cu']),
             make_cuda_ext(
                 name='deform_conv_cuda',
-                module='models.layers.dcn',
+                module='alphapose.models.layers.dcn',
                 sources=[
                     'src/deform_conv_cuda.cpp',
                     'src/deform_conv_cuda_kernel.cu'
                 ]),
             make_cuda_ext(
                 name='deform_pool_cuda',
-                module='models.layers.dcn',
+                module='alphapose.models.layers.dcn',
                 sources=[
                     'src/deform_pool_cuda.cpp',
                     'src/deform_pool_cuda_kernel.cu'
